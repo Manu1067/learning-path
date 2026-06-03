@@ -71,25 +71,35 @@ export default function App() {
         </p>
       </div>
 
-      {/* Career Buttons */}
       <div className="career-buttons">
-        <button onClick={() => setGoal("Frontend Developer")}>
-          Frontend
-        </button>
+  <button
+    className={goal === "Frontend Developer" ? "active" : ""}
+    onClick={() => setGoal("Frontend Developer")}
+  >
+    Frontend
+  </button>
 
-        <button onClick={() => setGoal("Backend Developer")}>
-          Backend
-        </button>
+  <button
+    className={goal === "Backend Developer" ? "active" : ""}
+    onClick={() => setGoal("Backend Developer")}
+  >
+    Backend
+  </button>
 
-        <button onClick={() => setGoal("AI Engineer")}>
-          AI/ML
-        </button>
+  <button
+    className={goal === "AI Engineer" ? "active" : ""}
+    onClick={() => setGoal("AI Engineer")}
+  >
+    AI/ML
+  </button>
 
-        <button onClick={() => setGoal("Cybersecurity")}>
-          Cybersecurity
-        </button>
-      </div>
-
+  <button
+    className={goal === "Cybersecurity" ? "active" : ""}
+    onClick={() => setGoal("Cybersecurity")}
+  >
+    Cybersecurity
+  </button>
+</div>
       {/* Dropdown */}
       <div className="controls">
         <select
@@ -108,14 +118,35 @@ export default function App() {
         </button>
       </div>
 
-      {/* Progress */}
-      {roadmap.length > 0 && (
-        <div className="progress-section">
-          <h2>
-            Progress: {completed.length}/{roadmap.length}
-          </h2>
-        </div>
-      )}
+      <div className="career-buttons">
+  <button
+    className={goal === "Frontend Developer" ? "active" : ""}
+    onClick={() => setGoal("Frontend Developer")}
+  >
+    Frontend
+  </button>
+
+  <button
+    className={goal === "Backend Developer" ? "active" : ""}
+    onClick={() => setGoal("Backend Developer")}
+  >
+    Backend
+  </button>
+
+  <button
+    className={goal === "AI Engineer" ? "active" : ""}
+    onClick={() => setGoal("AI Engineer")}
+  >
+    AI/ML
+  </button>
+
+  <button
+    className={goal === "Cybersecurity" ? "active" : ""}
+    onClick={() => setGoal("Cybersecurity")}
+  >
+    Cybersecurity
+  </button>
+</div>
 
       {/* Roadmap Cards */}
       <div className="roadmap-container">
