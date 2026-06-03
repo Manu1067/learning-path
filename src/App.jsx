@@ -1,105 +1,140 @@
 import { useState } from "react";
+import "./App.css";
 
 export default function App() {
   const [goal, setGoal] = useState("");
   const [roadmap, setRoadmap] = useState([]);
+  const [completed, setCompleted] = useState([]);
+
+  const paths = {
+    "Frontend Developer": [
+      { title: "HTML", level: "Beginner", duration: "1 Week" },
+      { title: "CSS", level: "Beginner", duration: "1 Week" },
+      { title: "JavaScript", level: "Intermediate", duration: "2 Weeks" },
+      { title: "React", level: "Intermediate", duration: "2 Weeks" },
+      { title: "Tailwind CSS", level: "Intermediate", duration: "1 Week" },
+      { title: "Git & GitHub", level: "Beginner", duration: "1 Week" },
+      { title: "Projects", level: "Advanced", duration: "Ongoing" },
+    ],
+
+    "Backend Developer": [
+      { title: "JavaScript", level: "Beginner", duration: "1 Week" },
+      { title: "Node.js", level: "Intermediate", duration: "2 Weeks" },
+      { title: "Express.js", level: "Intermediate", duration: "1 Week" },
+      { title: "MongoDB", level: "Intermediate", duration: "2 Weeks" },
+      { title: "REST APIs", level: "Intermediate", duration: "1 Week" },
+      { title: "Authentication", level: "Advanced", duration: "1 Week" },
+      { title: "Deployment", level: "Advanced", duration: "1 Week" },
+    ],
+
+    "AI Engineer": [
+      { title: "Python", level: "Beginner", duration: "2 Weeks" },
+      { title: "Data Structures", level: "Intermediate", duration: "2 Weeks" },
+      { title: "Machine Learning", level: "Intermediate", duration: "3 Weeks" },
+      { title: "Deep Learning", level: "Advanced", duration: "3 Weeks" },
+      { title: "LLMs", level: "Advanced", duration: "2 Weeks" },
+      { title: "LangChain", level: "Advanced", duration: "1 Week" },
+      { title: "Projects", level: "Advanced", duration: "Ongoing" },
+    ],
+
+    "Cybersecurity": [
+      { title: "Networking Basics", level: "Beginner", duration: "1 Week" },
+      { title: "Linux", level: "Beginner", duration: "2 Weeks" },
+      { title: "Web Security", level: "Intermediate", duration: "2 Weeks" },
+      { title: "Ethical Hacking", level: "Intermediate", duration: "3 Weeks" },
+      { title: "Penetration Testing", level: "Advanced", duration: "2 Weeks" },
+      { title: "Projects", level: "Advanced", duration: "Ongoing" },
+    ],
+  };
 
   const generateRoadmap = () => {
-    const paths = {
-      "Frontend Developer": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "React",
-        "Tailwind CSS",
-        "Git & GitHub",
-        "Projects",
-      ],
-      "AI Engineer": [
-        "Python",
-        "Data Structures",
-        "Machine Learning",
-        "Deep Learning",
-        "LLMs",
-        "LangChain",
-        "Projects",
-      ],
-      "Backend Developer": [
-        "JavaScript",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "APIs",
-        "Authentication",
-        "Deployment",
-      ],
-    };
+    setRoadmap(paths[goal] || []);
+    setCompleted([]);
+  };
 
-    setRoadmap(paths[goal] || ["No roadmap found"]);
+  const toggleComplete = (index) => {
+    if (completed.includes(index)) {
+      setCompleted(completed.filter((item) => item !== index));
+    } else {
+      setCompleted([...completed, index]);
+    }
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#0f172a",
-        color: "white",
-        padding: "40px",
-        fontFamily: "Arial",
-      }}
-    >
-      <h1 style={{ fontSize: "48px", marginBottom: "10px" }}>
-        Learning Path Generator
-      </h1>
+    <div className="app">
+      {/* Hero Section */}
+      <div className="hero">
+        <h1>🚀 Learning Path Generator</h1>
+        <p>
+          Generate personalized roadmaps for Frontend, Backend, AI, and
+          Cybersecurity careers.
+        </p>
+      </div>
 
-      <p style={{ color: "#94a3b8", marginBottom: "30px" }}>
-        Generate a roadmap for your dream career 🚀
-      </p>
+      {/* Career Buttons */}
+      <div className="career-buttons">
+        <button onClick={() => setGoal("Frontend Developer")}>
+          Frontend
+        </button>
 
-      <select
-        value={goal}
-        onChange={(e) => setGoal(e.target.value)}
-        style={{
-          padding: "12px",
-          width: "300px",
-          borderRadius: "10px",
-          border: "none",
-          marginRight: "10px",
-        }}
-      >
-        <option value="">Select Career Path</option>
-        <option>Frontend Developer</option>
-        <option>Backend Developer</option>
-        <option>AI Engineer</option>
-      </select>
+        <button onClick={() => setGoal("Backend Developer")}>
+          Backend
+        </button>
 
-      <button
-        onClick={generateRoadmap}
-        style={{
-          padding: "12px 20px",
-          background: "#8b5cf6",
-          border: "none",
-          color: "white",
-          borderRadius: "10px",
-          cursor: "pointer",
-        }}
-      >
-        Generate Path
-      </button>
+        <button onClick={() => setGoal("AI Engineer")}>
+          AI/ML
+        </button>
 
-      <div style={{ marginTop: "40px" }}>
+        <button onClick={() => setGoal("Cybersecurity")}>
+          Cybersecurity
+        </button>
+      </div>
+
+      {/* Dropdown */}
+      <div className="controls">
+        <select
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+        >
+          <option value="">Select Career Path</option>
+          <option>Frontend Developer</option>
+          <option>Backend Developer</option>
+          <option>AI Engineer</option>
+          <option>Cybersecurity</option>
+        </select>
+
+        <button className="generate-btn" onClick={generateRoadmap}>
+          Generate Path
+        </button>
+      </div>
+
+      {/* Progress */}
+      {roadmap.length > 0 && (
+        <div className="progress-section">
+          <h2>
+            Progress: {completed.length}/{roadmap.length}
+          </h2>
+        </div>
+      )}
+
+      {/* Roadmap Cards */}
+      <div className="roadmap-container">
         {roadmap.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              background: "#1e293b",
-              padding: "20px",
-              borderRadius: "12px",
-              marginBottom: "15px",
-              width: "400px",
-            }}
-          >
-            Step {index + 1}: {item}
+          <div className="roadmap-card" key={index}>
+            <div className="card-header">
+              <h3>
+                Step {index + 1}: {item.title}
+              </h3>
+
+              <input
+                type="checkbox"
+                checked={completed.includes(index)}
+                onChange={() => toggleComplete(index)}
+              />
+            </div>
+
+            <p>📚 Level: {item.level}</p>
+            <p>⏳ Duration: {item.duration}</p>
           </div>
         ))}
       </div>
