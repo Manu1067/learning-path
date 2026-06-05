@@ -221,3 +221,22 @@ input[type="checkbox"] {
   background: #7c3aed;
   transform: translateY(-2px);
 }
+.achievement {
+  width: fit-content;
+  margin: 20px auto;
+  padding: 15px 25px;
+  background: #16a34a;
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}

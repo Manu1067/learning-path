@@ -286,6 +286,12 @@ useEffect(() => {
     }}
   ></div>
 </div>
+{roadmap.length > 0 &&
+ completed.length === roadmap.length && (
+  <div className="achievement">
+    🎉 Congratulations! Roadmap Completed!
+  </div>
+)}
     {/* Roadmap Cards */}
 <div className="roadmap-container">
   {roadmap.map((item, index) => (
