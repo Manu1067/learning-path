@@ -188,3 +188,36 @@ input[type="checkbox"] {
   max-width: 900px;
   margin: 50px auto;
 }
+.progress-bar {
+  width: 300px;
+  height: 12px;
+  background: #1e293b;
+  border-radius: 20px;
+  margin: 15px auto 30px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #06b6d4
+  );
+  transition: width 0.4s ease;
+}
+.resource-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #8b5cf6;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.resource-btn:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+}
